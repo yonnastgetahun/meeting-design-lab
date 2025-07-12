@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Meeting Design Lab - Strategic Sync Framework Analyzer',
   description: 'Transform your meeting culture. Research shows 71% of meetings waste money, morale & lead to burnout.',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 }
 
 export default function RootLayout({
@@ -18,7 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+      </head>
+      <body className={`${inter.className} bg-pulse-navy text-white`}>
         <GoogleAnalytics />
         <MetaPixel />
         {children}

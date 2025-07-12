@@ -1,34 +1,68 @@
+'use client'
+
+import { useState } from 'react'
+import Container from './components/Layout/Container'
+import MobileNav from './components/Layout/MobileNav'
+import ProgressBar from './components/UI/ProgressBar'
+import AnswerCard from './components/UI/AnswerCard'
+import SliderInput from './components/UI/SliderInput'
+
 export default function Home() {
+  const [currentStep, setCurrentStep] = useState(1)
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
+  const [sliderValue, setSliderValue] = useState(50)
+
   return (
-    <main className="min-h-screen bg-pulse-navy">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-5xl font-bold text-white font-inter mb-4">
-          Meeting Design Lab
-        </h1>
-        <p className="text-pulse-mint text-xl mb-8">
-          Strategic Sync Framework Analyzer
-        </p>
+    <main className="min-h-screen bg-pulse-navy pb-24">
+      <Container className="pt-8">
+        <ProgressBar current={currentStep} total={14} />
         
-        {/* Your brand colors */}
-        <div className="flex gap-4 mb-8">
-          <div className="w-32 h-32 bg-pulse-coral rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold">Coral</span>
-          </div>
-          <div className="w-32 h-32 bg-pulse-navy border-2 border-pulse-mint rounded-lg flex items-center justify-center">
-            <span className="text-pulse-mint font-bold">Navy</span>
-          </div>
-          <div className="w-32 h-32 bg-pulse-mint rounded-lg flex items-center justify-center">
-            <span className="text-pulse-navy font-bold">Mint</span>
-          </div>
+        <div className="mt-8 mb-12">
+          <h1 className="text-3xl font-bold font-inter mb-2">
+            Meeting Design Lab
+          </h1>
+          <p className="text-pulse-mint">
+            Component Test Page
+          </p>
         </div>
-        
-        {/* Font tests */}
-        <div className="space-y-4 text-white">
-          <p className="font-inter text-2xl">Inter Font Test</p>
-          <p className="font-dm-serif text-2xl italic">DM Serif Display Test</p>
-          <p className="text-xl">IBM Plex Sans (Default)</p>
+
+        {/* Test Answer Cards */}
+        <div className="space-y-4 mb-8">
+          <h2 className="text-xl font-semibold mb-4">Answer Cards Test:</h2>
+          {[
+            { emoji: '😫', text: 'Drained and frustrated' },
+            { emoji: '🤔', text: 'Unclear what was accomplished' },
+            { emoji: '😐', text: 'Neutral - just another meeting' },
+          ].map((option, index) => (
+            <AnswerCard
+              key={index}
+              emoji={option.emoji}
+              text={option.text}
+              selected={selectedAnswer === index}
+              onClick={() => setSelectedAnswer(index)}
+              index={index}
+            />
+          ))}
         </div>
-      </div>
+
+        {/* Test Slider */}
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Slider Test:</h2>
+          <SliderInput
+            value={sliderValue}
+            onChange={setSliderValue}
+            label="Participation Rate"
+          />
+        </div>
+      </Container>
+
+      <MobileNav
+        currentStep={currentStep}
+        totalSteps={14}
+        onNext={() => setCurrentStep(Math.min(currentStep + 1, 14))}
+        onBack={() => setCurrentStep(Math.max(currentStep - 1, 1))}
+        canGoNext={selectedAnswer !== null}
+      />
     </main>
   )
 }
