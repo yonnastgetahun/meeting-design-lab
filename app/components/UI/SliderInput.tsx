@@ -1,8 +1,5 @@
 'use client'
 
-import * as Slider from '@radix-ui/react-slider'
-import { useState } from 'react'
-
 interface SliderInputProps {
   value: number
   onChange: (value: number) => void
@@ -10,7 +7,7 @@ interface SliderInputProps {
   max?: number
   step?: number
   label?: string
-  formatValue?: (value: number) => string
+  showValue?: boolean
 }
 
 export default function SliderInput({
@@ -20,53 +17,37 @@ export default function SliderInput({
   max = 100,
   step = 1,
   label,
-  formatValue = (v) => `${v}%`
+  showValue = true
 }: SliderInputProps) {
-  const [localValue, setLocalValue] = useState(value)
-
-  const handleChange = (values: number[]) => {
-    const newValue = values[0]
-    setLocalValue(newValue)
-    onChange(newValue)
-  }
+  const percentage = ((value - min) / (max - min)) * 100
 
   return (
-    <div className="w-full space-y-8">
-      <div className="text-center">
-        <div className="text-6xl font-bold bg-gradient-to-r from-pulse-coral to-pulse-mint 
-                        bg-clip-text text-transparent font-inter">
-          {formatValue(localValue)}
+    <div className="w-full space-y-2">
+      {(label || showValue) && (
+        <div className="flex justify-between items-center">
+          {label && <span className="text-sm font-medium text-gray-300">{label}</span>}
+          {showValue && <span className="text-sm font-medium text-pulse-coral">{value}</span>}
         </div>
-        {label && (
-          <p className="text-gray-400 mt-2">{label}</p>
-        )}
-      </div>
-      
-      <div className="px-3">
-        <Slider.Root
-          className="relative flex items-center select-none touch-none w-full h-5"
-          value={[localValue]}
-          onValueChange={handleChange}
-          max={max}
+      )}
+      <div className="relative w-full h-8 flex items-center">
+        <div className="absolute w-full h-2 bg-gray-700 rounded-full" />
+        <div 
+          className="absolute h-2 bg-gradient-to-r from-pulse-coral to-pulse-orange rounded-full"
+          style={{ width: `${percentage}%` }}
+        />
+        <input
+          type="range"
           min={min}
+          max={max}
           step={step}
-        >
-          <Slider.Track className="bg-gray-800 relative grow rounded-full h-2">
-            <Slider.Range className="absolute bg-gradient-to-r from-pulse-coral to-pulse-mint 
-                                   rounded-full h-full" />
-          </Slider.Track>
-          <Slider.Thumb
-            className="block w-12 h-12 bg-white shadow-lg rounded-full 
-                       hover:shadow-xl focus:outline-none focus:shadow-xl
-                       border-4 border-pulse-coral"
-            aria-label="Value"
-          />
-        </Slider.Root>
-        
-        <div className="flex justify-between mt-2 text-sm text-gray-500">
-          <span>{min}%</span>
-          <span>{max}%</span>
-        </div>
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="absolute w-full h-2 opacity-0 cursor-pointer"
+        />
+        <div
+          className="absolute w-6 h-6 bg-white rounded-full shadow-lg transform -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:scale-110 transition-transform hover:shadow-pulse-coral/30"
+          style={{ left: `${percentage}%`, top: '50%' }}
+        />
       </div>
     </div>
   )

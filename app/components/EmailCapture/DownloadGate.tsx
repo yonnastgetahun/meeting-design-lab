@@ -50,10 +50,10 @@ export default function DownloadGate({ score, category }: DownloadGateProps) {
         <p className="text-gray-300">
           Your Meeting Transformation Toolkit is on its way.
         </p>
-        
+        <a
           href={downloadUrl}
           className="inline-block py-4 px-8 rounded-xl font-inter font-semibold 
-                     bg-gradient-to-r from-pulse-coral to-pink-500 text-white
+                    bg-gradient-to-r from-pulse-coral to-pink-500 text-white
                      active:scale-[0.98] transition-transform
                      shadow-lg shadow-pulse-coral/25"
         >

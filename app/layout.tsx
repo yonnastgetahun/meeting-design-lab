@@ -1,32 +1,25 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import GoogleAnalytics from './components/Analytics/GoogleAnalytics'
-import MetaPixel from './components/Analytics/MetaPixel'
-
-const inter = Inter({ subsets: ['latin'] })
+import type { Metadata } from "next";
+import "./globals.css";
+import { inter, ibmPlex, dmSerif } from "./fonts";
 
 export const metadata: Metadata = {
-  title: 'Meeting Design Lab - Strategic Sync Framework Analyzer',
-  description: 'Transform your meeting culture. Research shows 71% of meetings waste money, morale & lead to burnout.',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-}
+  title: "Meeting Design Lab | Transform Your Team's Energy",
+  description: "Discover how much your meetings really cost and get actionable insights to transform team productivity.",
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-      </head>
-      <body className={`${inter.className} bg-pulse-navy text-white`}>
-        <GoogleAnalytics />
-        <MetaPixel />
+    <html 
+      lang="en" 
+      className={`${inter.variable} ${ibmPlex.variable} ${dmSerif.variable}`}
+    >
+      <body className={`${inter.className} antialiased`}>
         {children}
       </body>
     </html>
-  )
+  );
 }

@@ -1,31 +1,25 @@
 'use client'
 
-import { motion } from 'framer-motion'
-
 interface ProgressBarProps {
   current: number
   total: number
-  showLabel?: boolean
 }
 
-export default function ProgressBar({ current, total, showLabel = true }: ProgressBarProps) {
-  const percentage = (current / total) * 100
+export default function ProgressBar({ current, total }: ProgressBarProps) {
+  const progress = (current / total) * 100
 
   return (
     <div className="w-full">
-      <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-pulse-coral to-pulse-mint"
-          initial={{ width: 0 }}
-          animate={{ width: `${percentage}%` }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+      <div className="flex justify-between text-sm text-gray-400 mb-2">
+        <span>Question {current} of {total}</span>
+        <span>{Math.round(progress)}% Complete</span>
+      </div>
+      <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-pulse-coral to-pulse-orange rounded-full transition-all duration-300"
+          style={{ width: `${progress}%` }}
         />
       </div>
-      {showLabel && (
-        <p className="text-center text-sm text-gray-400 mt-2 font-inter">
-          {current} of {total}
-        </p>
-      )}
     </div>
   )
 }

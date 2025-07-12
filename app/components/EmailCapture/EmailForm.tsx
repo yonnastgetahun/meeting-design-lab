@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { trackEmailCapture } from '@/app/lib/analytics'
 
 interface EmailFormProps {
@@ -54,7 +55,12 @@ export default function EmailForm({ score, category, onSuccess }: EmailFormProps
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <motion.form
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      onSubmit={handleSubmit}
+      className="space-y-4"
+    >
       <div>
         <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-2">
           First Name
@@ -66,7 +72,7 @@ export default function EmailForm({ score, category, onSuccess }: EmailFormProps
           onChange={(e) => setFirstName(e.target.value)}
           className="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 
                      text-white placeholder-gray-500 focus:outline-none focus:border-pulse-coral
-                     transition-colors"
+                     focus:ring-2 focus:ring-pulse-coral/20 transition-all"
           placeholder="Enter your first name"
         />
       </div>
@@ -83,7 +89,7 @@ export default function EmailForm({ score, category, onSuccess }: EmailFormProps
           onChange={(e) => setEmail(e.target.value)}
           className="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 
                      text-white placeholder-gray-500 focus:outline-none focus:border-pulse-coral
-                     transition-colors"
+                     focus:ring-2 focus:ring-pulse-coral/20 transition-all"
           placeholder="your@email.com"
         />
       </div>
@@ -107,6 +113,6 @@ export default function EmailForm({ score, category, onSuccess }: EmailFormProps
       <p className="text-xs text-gray-400 text-center">
         We respect your privacy. Unsubscribe at any time.
       </p>
-    </form>
+    </motion.form>
   )
 }

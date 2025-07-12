@@ -1,57 +1,45 @@
 'use client'
 
-import { useState } from 'react'
-import { trackEvent } from '@/app/lib/analytics'
-
 interface MobileNavProps {
   currentStep: number
   totalSteps: number
   onNext: () => void
   onBack: () => void
   canGoNext: boolean
-  nextLabel?: string
 }
 
-export default function MobileNav({ 
-  currentStep, 
-  totalSteps, 
-  onNext, 
-  onBack, 
-  canGoNext,
-  nextLabel = 'Next'
+export default function MobileNav({
+  currentStep,
+  totalSteps,
+  onNext,
+  onBack,
+  canGoNext
 }: MobileNavProps) {
-  const handleNext = () => {
-    trackEvent('diagnostic_next_step', { step: currentStep })
-    onNext()
-  }
-
-  const handleBack = () => {
-    trackEvent('diagnostic_back_step', { step: currentStep })
-    onBack()
-  }
-
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-pulse-navy border-t border-gray-800 px-4 pb-6 pt-4">
-      <div className="max-w-lg mx-auto flex gap-3">
+    <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 px-4 py-4">
+      <div className="max-w-md mx-auto flex justify-between items-center">
         <button
-          onClick={handleBack}
+          onClick={onBack}
           disabled={currentStep === 1}
-          className="flex-1 py-4 px-6 rounded-xl font-inter font-semibold text-gray-400 bg-gray-800 
-                     disabled:opacity-50 disabled:cursor-not-allowed
-                     active:scale-95 transition-transform"
+          className="px-6 py-3 rounded-xl font-medium bg-gray-800 text-white hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Back
         </button>
+
+        <span className="text-sm text-gray-400">
+          {currentStep} / {totalSteps}
+        </span>
+
         <button
-          onClick={handleNext}
+          onClick={onNext}
           disabled={!canGoNext}
-          className="flex-1 py-4 px-6 rounded-xl font-inter font-semibold text-pulse-navy 
-                     bg-gradient-to-r from-pulse-coral to-pink-500
-                     disabled:opacity-50 disabled:cursor-not-allowed
-                     active:scale-95 transition-transform
-                     shadow-lg shadow-pulse-coral/25"
+          className={`px-8 py-3 rounded-xl font-medium transition-all ${
+            canGoNext
+              ? 'bg-gradient-to-r from-pulse-coral to-pink-500 text-white shadow-lg shadow-pulse-coral/25 active:scale-[0.98]'
+              : 'bg-gray-700 text-gray-400 cursor-not-allowed'
+          }`}
         >
-          {nextLabel}
+          Next
         </button>
       </div>
     </div>

@@ -1,51 +1,198 @@
-/* Import Google Fonts - MUST BE FIRST */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Tailwind v4 Custom Properties */
 @layer base {
   :root {
-    --color-pulse-coral: 255 107 107;
-    --color-pulse-navy: 26 28 51;
-    --color-pulse-mint: 181 234 215;
+    /* Brand Colors as CSS Variables */
+    --pulse-coral: #FF6B6B;
+    --pulse-navy: #1A1C33;
+    --pulse-mint: #B5EAD7;
+    --pulse-cream: #FAF3E0;
+    --pulse-orange: #FF9F40;
+    --pulse-purple: #6C5CE7;
+    
+    /* Semantic Colors */
+    --color-primary: var(--pulse-coral);
+    --color-secondary: var(--pulse-navy);
+    --color-accent: var(--pulse-mint);
+    --color-background: var(--pulse-navy);
+    --color-text: #ffffff;
+    --color-text-muted: #9CA3AF;
+  }
+
+  body {
+    @apply bg-pulse-navy text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Apply base styles */
-body {
-  font-family: 'IBM Plex Sans', sans-serif;
+@layer components {
+  /* Brand Button Styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-pulse-coral to-pink-500 text-white 
+           font-semibold py-3 px-6 rounded-xl
+           hover:shadow-lg hover:shadow-pulse-coral/25
+           active:scale-[0.98] transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-pulse-navy border-2 border-pulse-coral text-pulse-coral
+           font-semibold py-3 px-6 rounded-xl
+           hover:bg-pulse-coral hover:text-white
+           active:scale-[0.98] transition-all duration-200;
+  }
+
+  /* Brand Card Styles */
+  .card-gradient {
+    @apply bg-gradient-to-br from-gray-900/50 to-gray-800/50 
+           backdrop-blur-md border border-gray-700/50
+           rounded-2xl p-6;
+  }
+
+  /* Text Gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-pulse-coral to-pulse-orange 
+           bg-clip-text text-transparent;
+  }
+
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-/* Custom utility classes */
 @layer utilities {
-  .bg-pulse-coral {
-    background-color: rgb(var(--color-pulse-coral));
+  /* Animation Utilities */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
-  .bg-pulse-navy {
-    background-color: rgb(var(--color-pulse-navy));
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
-  .bg-pulse-mint {
-    background-color: rgb(var(--color-pulse-mint));
+
+  /* Glow Effects */
+  .glow-coral {
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
   }
-  .text-pulse-coral {
-    color: rgb(var(--color-pulse-coral));
+
+  .glow-mint {
+    box-shadow: 0 0 20px rgba(181, 234, 215, 0.5);
   }
-  .text-pulse-navy {
-    color: rgb(var(--color-pulse-navy));
+
+  /* Custom Focus Styles */
+  .focus-visible:focus {
+    @apply outline-none ring-2 ring-pulse-coral ring-offset-2 ring-offset-pulse-navy;
   }
-  .text-pulse-mint {
-    color: rgb(var(--color-pulse-mint));
+}
+
+/* Pulse Collab Brand Styles */
+
+/* Custom Brand Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
   }
-  .border-pulse-mint {
-    border-color: rgb(var(--color-pulse-mint));
+  50% {
+    box-shadow: 0 0 40px rgba(255, 107, 107, 0.8);
   }
-  .font-inter {
-    font-family: 'Inter', sans-serif;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
   }
-  .font-dm-serif {
-    font-family: 'DM Serif Display', serif;
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Brand Specific Utilities */
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Meeting Design Lab Specific */
+.mdl-hero-gradient {
+  background: linear-gradient(135deg, #1A1C33 0%, #2D1B3D 50%, #1A1C33 100%);
+}
+
+.mdl-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mdl-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(255, 107, 107, 0.15);
+}
+
+/* Text Effects */
+.text-shadow-glow {
+  text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+}
+
+/* Focus States */
+.focus-coral:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
+}
+
+/* Loading States */
+.skeleton-pulse {
+  background: linear-gradient(90deg, #1A1C33 0%, #2A2C43 50%, #1A1C33 100%);
+  background-size: 200% 100%;
+  animation: skeleton 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Mobile Touch Feedback */
+@media (hover: none) {
+  .touch-feedback {
+    -webkit-tap-highlight-color: rgba(255, 107, 107, 0.1);
+  }
+  
+  .touch-feedback:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Meeting Cost Indicator Colors */
+.cost-critical {
+  color: #FF6B6B;
+  border-color: #FF6B6B;
+}
+
+.cost-warning {
+  color: #FF9F40;
+  border-color: #FF9F40;
+}
+
+.cost-good {
+  color: #B5EAD7;
+  border-color: #B5EAD7;
+}
+
+/* Smooth Transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
