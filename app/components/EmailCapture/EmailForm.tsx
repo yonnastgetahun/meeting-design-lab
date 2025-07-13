@@ -6,7 +6,7 @@ import { trackEmailCapture } from '@/app/lib/analytics'
 
 interface EmailFormProps {
   score: number
-  category: 'critical' | 'struggling' | 'good'
+  category: 'critical' | 'struggling' | 'good' | 'excellent'
   onSuccess: (downloadUrl: string) => void
 }
 
@@ -62,7 +62,7 @@ export default function EmailForm({ score, category, onSuccess }: EmailFormProps
       className="space-y-4"
     >
       <div>
-        <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-2">
+        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
           First Name
         </label>
         <input
@@ -70,15 +70,15 @@ export default function EmailForm({ score, category, onSuccess }: EmailFormProps
           id="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 
-                     text-white placeholder-gray-500 focus:outline-none focus:border-pulse-coral
+          className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 
+                     text-pulse-navy placeholder-gray-400 focus:outline-none focus:border-pulse-coral
                      focus:ring-2 focus:ring-pulse-coral/20 transition-all"
           placeholder="Enter your first name"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
           Email Address *
         </label>
         <input
@@ -87,15 +87,15 @@ export default function EmailForm({ score, category, onSuccess }: EmailFormProps
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 
-                     text-white placeholder-gray-500 focus:outline-none focus:border-pulse-coral
+          className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 
+                     text-pulse-navy placeholder-gray-400 focus:outline-none focus:border-pulse-coral
                      focus:ring-2 focus:ring-pulse-coral/20 transition-all"
           placeholder="your@email.com"
         />
       </div>
 
       {error && (
-        <p className="text-red-400 text-sm">{error}</p>
+        <p className="text-red-500 text-sm">{error}</p>
       )}
 
       <button
@@ -110,7 +110,7 @@ export default function EmailForm({ score, category, onSuccess }: EmailFormProps
         {isLoading ? 'Processing...' : 'Get Your Free Toolkit'}
       </button>
 
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-gray-500 text-center">
         We respect your privacy. Unsubscribe at any time.
       </p>
     </motion.form>

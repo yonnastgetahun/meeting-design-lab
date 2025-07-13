@@ -17,12 +17,12 @@ export default function AnswerCard({ text, value, selected, onClick }: AnswerCar
       onClick={onClick}
       className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-200
         ${selected 
-          ? 'border-pulse-coral bg-pulse-coral/10 shadow-lg shadow-pulse-coral/20' 
-          : 'border-gray-700 hover:border-pulse-coral/50 hover:shadow-md'
+          ? 'border-pulse-coral bg-pulse-coral/10 shadow-md' 
+          : 'border-gray-200 bg-white hover:border-pulse-coral/50 hover:shadow-sm'
         }
       `}
     >
-      <p className="text-lg font-medium">{text}</p>
+      <p className="text-lg font-medium text-pulse-navy">{text}</p>
     </motion.div>
   )
 }

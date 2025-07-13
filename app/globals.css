@@ -16,13 +16,13 @@
     --color-primary: var(--pulse-coral);
     --color-secondary: var(--pulse-navy);
     --color-accent: var(--pulse-mint);
-    --color-background: var(--pulse-navy);
-    --color-text: #ffffff;
-    --color-text-muted: #9CA3AF;
+    --color-background: var(--pulse-cream);
+    --color-text: var(--pulse-navy);
+    --color-text-muted: #6B7280;
   }
 
   body {
-    @apply bg-pulse-navy text-white;
+    @apply bg-pulse-cream text-pulse-navy;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -32,22 +32,21 @@
   .btn-primary {
     @apply bg-gradient-to-r from-pulse-coral to-pink-500 text-white 
            font-semibold py-3 px-6 rounded-xl
-           hover:shadow-lg hover:shadow-pulse-coral/25
+           shadow-md hover:shadow-lg hover:shadow-pulse-coral/25
            active:scale-[0.98] transition-all duration-200;
   }
 
   .btn-secondary {
-    @apply bg-pulse-navy border-2 border-pulse-coral text-pulse-coral
-           font-semibold py-3 px-6 rounded-xl
+    @apply bg-white border-2 border-pulse-coral text-pulse-coral
+           font-semibold py-3 px-6 rounded-xl shadow-sm
            hover:bg-pulse-coral hover:text-white
            active:scale-[0.98] transition-all duration-200;
   }
 
   /* Brand Card Styles */
   .card-gradient {
-    @apply bg-gradient-to-br from-gray-900/50 to-gray-800/50 
-           backdrop-blur-md border border-gray-700/50
-           rounded-2xl p-6;
+    @apply bg-white/80 backdrop-blur-md border border-gray-200
+           rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow;
   }
 
   /* Text Gradient */
@@ -84,7 +83,7 @@
 
   /* Custom Focus Styles */
   .focus-visible:focus {
-    @apply outline-none ring-2 ring-pulse-coral ring-offset-2 ring-offset-pulse-navy;
+    @apply outline-none ring-2 ring-pulse-coral ring-offset-2 ring-offset-pulse-cream;
   }
 }
 
@@ -124,7 +123,7 @@
 
 /* Meeting Design Lab Specific */
 .mdl-hero-gradient {
-  background: linear-gradient(135deg, #1A1C33 0%, #2D1B3D 50%, #1A1C33 100%);
+  background: linear-gradient(135deg, #FAF3E0 0%, #FFF8F0 50%, #FAF3E0 100%);
 }
 
 .mdl-card-hover {
@@ -149,7 +148,7 @@
 
 /* Loading States */
 .skeleton-pulse {
-  background: linear-gradient(90deg, #1A1C33 0%, #2A2C43 50%, #1A1C33 100%);
+  background: linear-gradient(90deg, #F3F4F6 0%, #E5E7EB 50%, #F3F4F6 100%);
   background-size: 200% 100%;
   animation: skeleton 1.5s ease-in-out infinite;
 }
