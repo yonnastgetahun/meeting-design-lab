@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { trackEmailCapture } from '@/app/lib/analytics'
+import { trackEmailCapture } from '@/lib/analytics'
 
 interface EmailFormProps {
   score: number
