@@ -19,7 +19,6 @@ export interface DiagnosticPart {
   title: string
   hook: string
   questions: Question[]
-  miniInsightAfter?: string // Question ID after which to show mini-insight
   emailCaptureTitle: string
   emailCaptureDescription: string
 }
@@ -33,24 +32,25 @@ const personalQuestions: Question[] = [
     type: 'multiple-choice',
     weight: 3, // High impact - burnout indicator
     options: [
-      { text: "None - fully booked by others", value: 1, score: 1 },
-      { text: "Limited - I can block some time", value: 2, score: 3 },
-      { text: "Moderate - I can protect key hours but worry about pushback", value: 3, score: 6 },
-      { text: "High - I confidently own my schedule", value: 4, score: 10 }
+      { text: "Complete control", value: 1, score: 10 },
+      { text: "Mostly in control", value: 2, score: 6 },
+      { text: "Some control", value: 3, score: 3 },
+      { text: "Little control", value: 4, score: 1 },
+      { text: "No control", value: 5, score: 0 }
     ]
   },
   {
     id: 'p2',
     part: 'personal',
-    text: "How are your meetings typically distributed throughout the day?",
-    subtext: "This affects your ability to focus",
+    text: "How are your meetings distributed throughout the day?",
     type: 'multiple-choice',
     weight: 3, // High impact - context switching
     options: [
-      { text: "Back-to-back meeting marathons", value: 1, score: 1 },
-      { text: "Scattered randomly throughout the day", value: 2, score: 3 },
-      { text: "Clustered in 2-3 hour blocks", value: 3, score: 7 },
-      { text: "Mostly grouped in one part of the day", value: 4, score: 10 }
+      { text: "Well-spaced with focus blocks", value: 1, score: 10 },
+      { text: "Mostly grouped", value: 2, score: 7 },
+      { text: "Scattered", value: 3, score: 3 },
+      { text: "Back-to-back", value: 4, score: 1 },
+      { text: "Random and unpredictable", value: 5, score: 0 }
     ]
   },
   {
@@ -246,21 +246,19 @@ const teamQuestions: Question[] = [
 export const diagnosticParts: DiagnosticPart[] = [
   {
     id: 'personal',
-    title: 'Personal Productivity & Burnout Risk',
-    hook: 'How much is meeting chaos costing YOU?',
+    title: 'Personal Assessment',
+    hook: 'Is the current meeting culture blocking your best work?',
     questions: personalQuestions,
-    miniInsightAfter: 'p3', // Show context switching insight after question 3
-    emailCaptureTitle: 'Personal productivity templates/guides',
-    emailCaptureDescription: 'Get your personalized productivity recovery plan'
+    emailCaptureTitle: 'Get Your Productivity Action Plan',
+    emailCaptureDescription: 'Receive personalized strategies to reclaim your peak performance'
   },
   {
     id: 'team',
-    title: 'Team Meeting Health',
-    hook: "Now let's diagnose your team's meeting culture",
+    title: 'Team Assessment',
+    hook: "Now let's look at your team's meeting dynamics",
     questions: teamQuestions,
-    miniInsightAfter: 't3', // Show engagement score after question 3
-    emailCaptureTitle: 'Team facilitation playbooks/workshops',
-    emailCaptureDescription: 'Transform your team\'s meeting culture'
+    emailCaptureTitle: 'Get Your Team Acceleration Plan',
+    emailCaptureDescription: 'Transform your team\'s velocity with proven meeting strategies'
   }
 ]
 
@@ -291,9 +289,10 @@ export function calculateContextSwitching(meetingDistribution: number): {
   productivityLoss: number
 } {
   // Based on meeting distribution answer
-  const switchesPerDay = meetingDistribution === 1 ? 8 : 
-                        meetingDistribution === 2 ? 6 : 
-                        meetingDistribution === 3 ? 3 : 1
+  const switchesPerDay = meetingDistribution === 1 ? 1 : 
+                        meetingDistribution === 2 ? 3 : 
+                        meetingDistribution === 3 ? 6 : 
+                        meetingDistribution === 4 ? 8 : 10
 
   const minutesLostPerSwitch = 23 // Research-based
   const baseMinutesLost = switchesPerDay * minutesLostPerSwitch

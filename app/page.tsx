@@ -9,23 +9,23 @@ export default function Home() {
       <div className="max-w-4xl mx-auto px-4 py-16 sm:py-24">
         <div className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-            Your Meetings Are Killing<br />
-            <span className="text-red-600">Your Team's Productivity</span>
+            Velocity or burnout—<br />
+            <span className="text-red-600">which way is your team heading?</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Discover exactly how much meeting chaos is costing you—and get a personalized action plan to fix it.
+            See how your meeting culture stacks up. Discover where you're losing momentum, what it's costing—and get the roadmap top teams use.
           </p>
           
           <a 
             href="/diagnostic" 
             className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg"
           >
-            Start Free Diagnostic
+            Start Your Audit
             <ArrowRight className="ml-2 h-5 w-5" />
           </a>
           
           <p className="mt-4 text-sm text-gray-500">
-            Takes less than 5 minutes • No email required to start
+            5-minute assessment • Benchmark results
           </p>
         </div>
 
@@ -53,16 +53,16 @@ export default function Home() {
         {/* What You'll Get */}
         <div className="bg-blue-50 rounded-xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            Your Free Meeting Diagnostic Includes:
+            Your Audit Reveals:
           </h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="flex items-start">
               <CheckCircle className="h-6 w-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-gray-900">Personal Productivity Analysis</h3>
+                <h3 className="font-semibold text-gray-900">Personal Impact Score</h3>
                 <p className="text-gray-600 text-sm mt-1">
-                  See exactly how meeting chaos affects your deep work and burnout risk
+                  Uncover how meetings are affecting your deep work, energy levels, and burnout risk
                 </p>
               </div>
             </div>
@@ -70,9 +70,9 @@ export default function Home() {
             <div className="flex items-start">
               <CheckCircle className="h-6 w-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-gray-900">Team Effectiveness Score</h3>
+                <h3 className="font-semibold text-gray-900">Team Performance Benchmark</h3>
                 <p className="text-gray-600 text-sm mt-1">
-                  Compare your team's meeting culture to top performers
+                  See exactly where your team stands compared to high-velocity teams
                 </p>
               </div>
             </div>
@@ -80,19 +80,9 @@ export default function Home() {
             <div className="flex items-start">
               <CheckCircle className="h-6 w-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-gray-900">Context Switching Calculator</h3>
+                <h3 className="font-semibold text-gray-900">Custom Action Plan</h3>
                 <p className="text-gray-600 text-sm mt-1">
-                  Discover hours lost to mental task-switching between meetings
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start">
-              <CheckCircle className="h-6 w-6 text-green-600 mr-3 flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-gray-900">Action Plan & Resources</h3>
-                <p className="text-gray-600 text-sm mt-1">
-                  Get templates and guides tailored to your specific challenges
+                  Get specific strategies and tools that top teams use to fix your exact issues
                 </p>
               </div>
             </div>
@@ -105,7 +95,7 @@ export default function Home() {
             href="/diagnostic" 
             className="inline-flex items-center bg-blue-600 text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg"
           >
-            Take the Free Diagnostic
+            Start Your Audit
             <ArrowRight className="ml-2 h-5 w-5" />
           </a>
           

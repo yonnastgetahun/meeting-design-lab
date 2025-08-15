@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { trackEmailCapture } from '@/lib/analytics'
 
+
 interface EmailFormProps {
   score: number
   category: 'critical' | 'struggling' | 'good' | 'excellent'

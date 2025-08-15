@@ -58,6 +58,7 @@
   /* Smooth Scrolling */
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 20px;
   }
 }
 
@@ -87,7 +88,233 @@
   }
 }
 
-/* Pulse Collab Brand Styles */
+/* ========================================
+   MOBILE OPTIMIZATION - QUESTION SCREENS
+   ======================================== */
+
+/* Prevent scrolling on question screens */
+.h-screen {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile browsers */
+}
+
+/* Ensure no overflow on mobile */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Compact spacing for mobile */
+  .question-screen {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Ensure buttons are tappable but compact */
+  button {
+    min-height: 40px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent text selection on buttons */
+  button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Optimize for small screens (iPhone SE, etc) */
+  @media (max-height: 700px) {
+    /* Even more compact for small phones */
+    .text-sm {
+      font-size: 0.875rem;
+      line-height: 1.2;
+    }
+    
+    .text-xs {
+      font-size: 0.75rem;
+      line-height: 1.2;
+    }
+    
+    .py-3 {
+      padding-top: 0.625rem;
+      padding-bottom: 0.625rem;
+    }
+    
+    .py-2\.5 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+  
+  /* Mobile-specific adjustments for better scroll experience */
+  html {
+    scroll-padding-top: 10px;
+  }
+}
+
+/* Visual feedback for touch */
+@media (hover: none) and (pointer: coarse) {
+  button:active {
+    transform: scale(0.98);
+  }
+  
+  .touch-feedback {
+    -webkit-tap-highlight-color: rgba(255, 107, 107, 0.1);
+  }
+  
+  .touch-feedback:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Landscape mode adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .h-screen {
+    height: 100vh;
+  }
+  
+  /* Hide progress dots in landscape to save space */
+  .flex.gap-1 {
+    display: none;
+  }
+  
+  /* Reduce padding in landscape */
+  .px-4 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .py-2 {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+  }
+}
+
+/* ========================================
+   ENHANCED SLIDER STYLES
+   ======================================== */
+
+/* Slider Container */
+.slider-container {
+  @apply relative select-none;
+}
+
+/* Slider Track - Enhanced Contrast */
+.slider-track {
+  @apply relative h-2 bg-gray-200 rounded-full overflow-hidden;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Filled Track - More Visible */
+.slider-track-filled {
+  @apply absolute h-full bg-blue-600 rounded-full transition-all duration-200;
+  background: linear-gradient(90deg, #3B82F6 0%, #2563EB 100%);
+}
+
+/* Slider Thumb - Enhanced Visibility */
+.slider-thumb {
+  @apply absolute w-6 h-6 bg-white rounded-full transition-all duration-200 cursor-grab;
+  border: 3px solid #3B82F6;
+  box-shadow: 
+    0 2px 4px 0 rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(59, 130, 246, 0.1);
+  top: -8px;
+}
+
+.slider-thumb:hover {
+  @apply scale-110;
+  box-shadow: 
+    0 4px 6px 0 rgba(0, 0, 0, 0.15),
+    0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.slider-thumb:active {
+  @apply scale-105 cursor-grabbing;
+}
+
+/* Value Tooltip */
+.slider-value {
+  @apply absolute -top-8 left-1/2 transform -translate-x-1/2;
+  @apply bg-gray-800 text-white px-2 py-1 rounded text-xs font-semibold;
+  @apply whitespace-nowrap opacity-0 transition-opacity duration-200;
+  @apply pointer-events-none;
+}
+
+/* Show tooltip on container hover */
+.slider-container:hover .slider-value {
+  @apply opacity-100;
+}
+
+/* Focus states for accessibility */
+input[type="range"]:focus + .slider-thumb {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* Native input styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-track {
+  height: 8px;
+  border-radius: 4px;
+  background: #E5E7EB;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  cursor: pointer;
+  border: 3px solid #3B82F6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 0 0 1px rgba(59, 130, 246, 0.1);
+  margin-top: -8px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  cursor: pointer;
+  border: 3px solid #3B82F6;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 0 0 1px rgba(59, 130, 246, 0.1);
+}
+
+/* Hover effect */
+input[type="range"]:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15), 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+  transform: scale(1.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15), 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* Specific styles for Meeting Design Lab sliders */
+.attendee-slider .slider-track-filled {
+  @apply bg-purple-600;
+  background: linear-gradient(90deg, #9333EA 0%, #7C3AED 100%);
+}
+
+.salary-slider .slider-track-filled {
+  @apply bg-green-600;
+  background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+}
+
+/* ========================================
+   BRAND SPECIFIC ANIMATIONS & EFFECTS
+   ======================================== */
 
 /* Custom Brand Animations */
 @keyframes pulse-glow {
@@ -108,6 +335,35 @@
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }
 
@@ -153,26 +409,6 @@
   animation: skeleton 1.5s ease-in-out infinite;
 }
 
-@keyframes skeleton {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* Mobile Touch Feedback */
-@media (hover: none) {
-  .touch-feedback {
-    -webkit-tap-highlight-color: rgba(255, 107, 107, 0.1);
-  }
-  
-  .touch-feedback:active {
-    transform: scale(0.98);
-  }
-}
-
 /* Meeting Cost Indicator Colors */
 .cost-critical {
   color: #FF6B6B;
@@ -188,6 +424,38 @@
   color: #B5EAD7;
   border-color: #B5EAD7;
 }
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(255, 107, 107, 0.15);
+}
+
+/* Status indicators */
+.status-dot {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth transitions for the diagnostic results */
+.diagnostic-results {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Mobile-specific visual adjustments */
+@media (max-width: 640px) {
+  .metric-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* ========================================
+   SMOOTH TRANSITIONS
+   ======================================== */
 
 /* Smooth Transitions */
 * {

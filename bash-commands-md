@@ -1,0 +1,97 @@
+# Bash Commands for Meeting Design Lab
+
+## Project Navigation
+
+### Quick Overview
+```bash
+# Show project structure (3 levels, no clutter)
+tree -I 'node_modules|.git|coverage|dist|build|.next|out' -L 3 --dirsfirst
+```
+
+### Find Slider Components
+```bash
+# Find all slider-related files
+find . -name "*[Ss]lider*" -type f | grep -v node_modules
+
+# Search for slider implementations in code
+grep -r "Slider" --include="*.jsx" --include="*.tsx" --exclude-dir=node_modules .
+```
+
+### Find Meeting Design Lab Components
+```bash
+# Find Team Intro and Meeting components
+find . \( -name "*[Tt]eam*" -o -name "*[Ii]ntro*" -o -name "*[Mm]eeting*" \) \
+  -type f \( -name "*.jsx" -o -name "*.tsx" \) | grep -v node_modules
+```
+
+### Search for Specific Code
+```bash
+# Find files containing attendees or salary sliders
+grep -r -l "attendees\|salary" --include="*.jsx" --include="*.tsx" --exclude-dir=node_modules .
+```
+
+## Component Structure
+
+### View Components Only
+```bash
+# Show only React component files
+tree -P '*.jsx|*.tsx' --prune -I 'node_modules|coverage|dist|build'
+```
+
+### View Styles Only
+```bash
+# Show only CSS/style files
+tree -P '*.css|*.scss|*.module.css' --prune -I 'node_modules'
+```
+
+## Development Shortcuts
+
+### Quick Component Search
+```bash
+# Search for a specific component by name
+find . -name "*ComponentName*" | grep -E "\.(jsx?|tsx?)$" | grep -v node_modules
+```
+
+### Find TODO Comments
+```bash
+# Find all TODO comments in the codebase
+grep -r "TODO\|FIXME" --include="*.jsx" --include="*.tsx" --include="*.js" --exclude-dir=node_modules .
+```
+
+## Git Helpers
+
+### Show Changed Files
+```bash
+# Show files changed in the last commit
+git diff --name-only HEAD~1 HEAD
+
+# See what files have changed
+git status
+
+# See the commit history
+git log --oneline -10
+
+# Show files with "slider" that were recently modified
+git log --name-only --pretty=format: | grep -i slider | sort -u
+```
+
+## Running These Commands
+
+1. Copy the command you need
+2. Paste in your terminal
+3. Run from the project root directory
+
+## Tips
+
+- Add `-v node_modules` to most `find` commands to exclude node_modules
+- Use `| head -20` to limit output to first 20 results
+- Add `| wc -l` to count results instead of listing them
+- Use `pbcopy` (Mac) or `xclip` (Linux) to copy output to clipboard
+
+## Project-Specific Paths
+
+Based on our project structure, key directories to check:
+- `src/components/` - React components
+- `src/styles/` or `styles/` - Global styles
+- `app/` - Next.js app directory (if using App Router)
+- `pages/` - Next.js pages (if using Pages Router)
